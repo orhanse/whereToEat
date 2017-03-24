@@ -1,0 +1,112 @@
+{% extends "header.html" %}
+
+{% block content %}
+<script>
+	$(function() {
+    $('input:checkbox').change(function() {
+      $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+      if (this.id != "modeOfTransport")
+      	return;
+      var value = this.value;
+      var newStatus;
+      if($(this).prop("checked") == true)
+    	  newStatus = 'activated';
+      else
+    	  newStatus = 'deactivated';
+      $.ajax({
+    	    url:"/restaurant/status",
+    	    type: "POST",
+    	    data: {name: value,status:newStatus},
+    	    success:function(response){},
+    	    complete:function(){},
+    	    error:function (xhr, textStatus, thrownError){
+    	        alert("error doing something");
+    	    }
+    	});
+    })
+  })</script>
+  <body>
+  
+	
+    <div class="container">
+   {%if Restaurants%}
+		
+  <table  class="table">
+	 <thead>
+      <tr>
+        <th></th>
+        <th>Restaurant Name</th>
+        <th>Avaiable in bad weather</th>
+        <th>Mode of Transport</th>
+        <th>Service Counter</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+	<tbody>
+	{% for restaurant in Restaurants %}
+		<tr>
+				    <td><img src="/static/images/rest.png" class="img-circle" alt="foodiconset"
+		width="50" height="50"> </td>
+			<td class="UsersModelItem">{{restaurant.restName}}</td>
+			<td class="UsersModelItem">{{restaurant.weatherCondition}}</td>
+			{%if restaurant.modeOfTransport is True%}
+			<td class="UsersModelItem">Vehicle</td>
+			{%endif%}
+			{%if restaurant.modeOfTransport is False%}
+			<td class="UsersModelItem">Pedestrian</td>
+			{%endif%}
+			<td class="UsersModelItem">{{restaurant.serviceCounter}}</td>
+			<td>
+			{%if restaurant.serviceStatus is True%}
+			<input id="modeOfTransport" name="modeOfTransport" type="checkbox" checked data-toggle="toggle" data-on="Active" data-off="Inactive" value ="{{restaurant.restName}}">
+			{%endif%}
+			{%if restaurant.serviceStatus is False%}
+			<input id="modeOfTransport" name="modeOfTransport" type="checkbox"  data-toggle="toggle" data-on="Active" data-off="Inactive" value ="{{restaurant.restName}}" >
+			{%endif%}
+			</td>
+			<td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    		<td><form action="/restaurant/delete" method="POST">{% csrf_token %}<p data-placement="top" data-toggle="tooltip" title="Delete"><input type="hidden" name="restName" value="{{restaurant.restName}}"><button class="btn btn-danger btn-xs" type="submit" data-title="Delete" data-toggle="modal" ><span class="glyphicon glyphicon-trash"></span></button></p></form></td>
+			
+		</tr>
+		{% endfor %}
+		
+		</tbody>
+	</table>
+	{% endif %}
+	<div class="container bg-2 text-center">
+	<h3>Add new Restaurant ?</h3>
+	<form class="col-lg-12" action="/restaurant/Rest" method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+		
+			<label for="restName">Restaurant Name: </label> <input class="form-control"
+				id="name_text" name="restName" type="text" required="required">
+		</div>
+		<font size="5">Transportation Type: </font>
+		<input id="modeOfTransport1" name="modeOfTransport" type="checkbox" checked data-toggle="toggle" data-on="Vehicle" data-off="pedestrian" >
+		<div class="form-group">
+		<font size="5">Available in bad weather ?</font>
+		<input id="weatherCondition1" name="weatherMode" type="checkbox" checked data-toggle="toggle" data-on="Yeap !" data-off=" No!" >
+		</div>
+		<button type="submit" id="share" class="btn btn-default">Add
+			Restaurant</button>
+	</form>
+</div>
+    </div> <!-- /container -->
+  
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+    
+    
+  </body>
+{% endblock %}

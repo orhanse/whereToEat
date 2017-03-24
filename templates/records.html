@@ -1,0 +1,36 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+<div class="col-sm-1"></div>
+      <div class="col-sm-2"> <img src="/static/images/like.png" class="img-square" alt="foodiconset"
+		width="100" height="100">
+      </div>
+    <div class="col-sm-6">
+{% if Records %}
+<table id="usersTable" class="table">
+ <thead>
+      <tr>
+      	<th>Count </th>
+        <th>Restaurant Name</th>
+        <th>Mode of transport</th>
+        <th>Weather</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+	<tbody>
+
+	{% for record in Records %}
+		<tr>	
+				<td class="UsersModelItem"> {{record.counter}}.</td>
+				<td class="UsersModelItem"> {{record.restaurant}} </td>
+				<td class="UsersModelItem"> {{record.modeOfTransport}} </td>
+				<td class="UsersModelItem"> {{record.weather}} </td>
+				<td class="UsersModelItem">{{record.date}} </td>
+		</tr>
+	{% endfor %}
+
+		</table>
+		</tbody>
+{% endif %}
+</div>
+{% endblock %}

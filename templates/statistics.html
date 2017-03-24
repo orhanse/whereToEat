@@ -1,0 +1,86 @@
+{% extends "header.html" %}
+{% block content %}
+<body>
+
+
+
+
+
+
+
+<div class="container">
+    <div class="col-md-6">
+    {% if app %}
+    <table class="table">
+    	<thead>
+    		<th>City	</th>
+       	 	<th>Period	</th>
+        	<th>CountDown	</th>
+    	</thead>
+    	<tbody>
+    		<td class="UsersModelItem">{{app.currentCity}}	</td>
+			<td class="UsersModelItem">{{app.calculationPeriod}}	</td>
+			<td class="UsersModelItem">{{app.periodCounter}}	</td>
+    	</tbody>
+    </table>
+    {% endif %}
+    
+    {% if infoList %}
+    <table class="table">
+    	<thead>
+    		<th>Total Users	</th>
+       	 	<th>Total Points	</th>
+        	<th>Total Rests	</th>
+        	<th>Vehicle Rests	</th>
+       	 	<th>Pedestrian Rests	</th>
+        	<th>aviableInBadWeather	</th>
+        	<th>AnaviableInBadWeather	</th>
+       	 	<th>Active</th>
+        	<th>Inactive</th>
+    	</thead>
+    	<tbody>
+    	{%for info in infoList%}
+    	<tr>
+    		<td class="UsersModelItem">{{info.userCount}}	</td>
+			<td class="UsersModelItem">{{info.totalPoints}}	</td>
+			<td class="UsersModelItem">{{info.totalRests}}	</td>
+			<td class="UsersModelItem">{{info.vehicleRests}}	</td>
+			<td class="UsersModelItem">{{info.pedestrianRests}}	</td>
+			<td class="UsersModelItem">{{info.aviableInBadWeather}}	</td>
+			<td class="UsersModelItem">{{info.AnaviableInBadWeather}}	</td>
+			<td class="UsersModelItem">{{info.activeRests}}	</td>
+			<td class="UsersModelItem">{{info.inactiveRests}}	</td>
+		<tr>
+		{%endfor%}
+    	</tbody>
+    </table>
+    {% endif %}
+     {% if Calculation %}
+    <table class="table">
+    	<thead>
+    		<th>Restaurant</th>
+       	 	<th>Went</th>
+        	<th>Points</th>
+        	<th>Left Counter</th>
+       	 	<th>ModeOfTransport</th>
+        	<th>Is aviableInBadWeather	</th>
+        	<th>ServiceStatus	</th>
+    	</thead>
+    	<tbody>
+    	{%for info in Calculation%}
+    	<tr>
+    		<td class="UsersModelItem">{{info.restName}}	</td>
+			<td class="UsersModelItem">{{info.wentCount}}	</td>
+			<td class="UsersModelItem">{{info.point}}	</td>
+			<td class="UsersModelItem">{{info.serviceCounter}}	</td>
+			<td class="UsersModelItem">{{info.modeOfTransport}}	</td>
+			<td class="UsersModelItem">{{info.weatherCondition}}	</td>
+			<td class="UsersModelItem">{{info.serviceStatus}}	</td>
+
+		<tr>
+		{%endfor%}
+    	</tbody>
+    </table>
+    {% endif %}
+   </body>
+{%endblock%}

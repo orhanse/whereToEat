@@ -1,0 +1,31 @@
+{% extends "header.html" %}
+{% block content %}
+<body>
+<div class="container">
+    <div class="col-md-6">
+    {% if Context %}
+    <table class="table">
+    	<thead>
+    		<th>Weather	</th>
+       	 	<th>Date	</th>
+       	 	<th>Time	</th>
+    	</thead>
+    	<tbody>
+    		<td class="UsersModelItem">{{Context.currentWeather}}	</td>
+			<td class="UsersModelItem">{{Context.date}} </td>
+			{% if Context.time %}
+			<td class="UsersModelItem">{{Context.time}} </td>
+			{% endif %}
+    	</tbody>
+    </table>
+    {% endif %}
+    <div id="logbox">
+      <form id="getUser" method="POST" action="/calculation/weather"> {% csrf_token %}
+        <h1>Set Weather</h1>
+        <input name="weather" type="text" placeholder="Weather?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
+        <input type="submit" value="Add CR" class="inputButton"/>
+      </form>
+    </div>
+   </div>
+   </body>
+{%endblock%}

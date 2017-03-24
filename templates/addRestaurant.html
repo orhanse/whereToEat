@@ -1,0 +1,43 @@
+{% extends "header.html" %} 
+{% block content %}
+<html>
+
+
+
+<div class="container bg-2 text-center">
+	<h3>Please enter the information of restaurant</h3>
+	<form class="col-lg-12" action="restaurant/addRest/"
+		method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="restName">Restaurant Name: </label> <input class="form-control"
+				id="name_text" name="restName" type="text" required="required">
+		</div>
+		<div class="form-group">
+			<label for="weatherCondition">Weather Condition:</label> <input type="checkbox"
+				name="weatherCondition" value="true"> Open area<br> <input
+				type="checkbox" name="weatherCondition" value="false" checked> 
+				Closed Area<br> 
+		</div>
+		<div class="form-group">
+			<label for="modeOfTransport">Transportation Type</label> <input type="checkbox"
+				name="modeOfTransport" value=True> Vehicle <br> <input
+				type="checkbox" name="modeOfTransport" value=False checked> Pedestrian
+				<br> 
+		</div>
+		<div class="form-group">
+			<label for="serviceStatus">Please enter e-mail:</label> <input
+				type="checkbox" name="serviceStatus" value=true> Active<br>
+			<input type="checkbox" name="serviceStatus" value=false checked> Inactive
+			<br>
+		</div>
+		<button type="submit" id="btn_sign" class="btn btn-default">Add
+			User</button>
+	</form>
+</div>
+
+
+<form action="/action_page.php" method="get"></form>
+
+</html>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+<div class="col-sm-1"></div>
+      <div class="col-sm-2"> <img src="/static/images/like.png" class="img-square" alt="foodiconset"
+		width="100" height="100">
+      </div>
+    <div class="col-sm-6">
+{% if Points %}
+<table id="usersTable" class="table">
+ <thead>
+      <tr>
+        <th>User Name</th>
+        <th>Restaurant Name</th>
+        <th>Point</th>
+      </tr>
+    </thead>
+	<tbody>
+
+	{% for point in Points %}
+		<tr>
+				<td class="UsersModelItem"> {{point.user}} </td>
+				<td class="UsersModelItem"> {{point.restaurant}} </td>
+				<td class="UsersModelItem">{{point.point}} </td>
+		</tr>
+	{% endfor %}
+
+		</table>
+		</tbody>
+{% endif %}
+</div>
+{% endblock %}

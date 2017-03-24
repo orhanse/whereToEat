@@ -1,0 +1,53 @@
+{% extends "header.html" %} {% block content %}
+
+
+
+<div class="container">
+
+	<div class="jumbotron">
+		<h1>Hi User! Have a nice day!</h1>
+		<p class="lead">Welcome to Nerede Yesek?</p>
+		<a
+			href="https://www.accuweather.com/en/us/new-york-ny/10007/weather-forecast/349727"
+			class="aw-widget-legal"> <!--
+By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at https://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at https://www.accuweather.com/en/privacy.
+-->
+		</a>
+		<div id="awcc1489847466361" class="aw-widget-current"
+			data-locationkey="" data-unit="f" data-language="en-us"
+			data-useip="true" data-uid="awcc1489847466361"></div>
+		<script type="text/javascript"
+			src="https://oap.accuweather.com/launch.js"></script>
+	</div>
+
+	<div class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-4">
+				{%if flag == False%}
+				<h1>Schedule</h1>
+				<p>Start Calculation</p>
+				<p>
+					<a class="btn btn-default" href="/startApp" role="button">Go!
+						&raquo;</a>
+				</p>
+				{%elif flag == True%}
+					<h1>Calculation is Running</h1>
+				<p></p>
+				<p>
+					<a class="btn btn-default" href="/reset" role="button">Reset
+						&raquo;</a>
+				</p>				
+				{%endif%}
+				
+			</div>
+
+		</div>
+
+	</div>
+	<!-- /container -->
+	<span id="awxWeatherInfo"></span>
+</div>
+
+
+{% endblock %}

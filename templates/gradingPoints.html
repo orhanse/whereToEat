@@ -1,0 +1,30 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+<div class="col-sm-1"></div>
+      <div class="col-sm-2"> <img src="/static/images/grade.png" class="img-square" alt="foodiconset"
+		width="100" height="100">
+      </div>
+    <div class="col-sm-6">
+{% if user %}
+<h3>Your points: {{user.userPoints}}</h3>
+{% endif %}
+{% if Restaurants %}
+<form action="/grading/getPoint" method="POST"> {% csrf_token %} 
+<table id="usersTable" class="table">
+	{% for restaurant in Restaurants %}
+	<input type="hidden" name="userName" value="{{user.userName}}">
+	<input type="hidden" name="restName[]" value="{{restaurant.restName}}">
+		<tr>
+				<td class="UsersModelItem"> {{restaurant.restName}} </td>
+				<td class="UsersModelItem"><input type="number" name="points[]" min="0" max = "50" class="form-control" placeholder="0"> </td>
+		</tr>
+	{% endfor %}
+
+		</table>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+{% endif %}
+</div>
+</div>
+{% endblock %}

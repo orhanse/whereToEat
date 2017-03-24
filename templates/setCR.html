@@ -1,0 +1,39 @@
+{% extends "header.html" %}
+{% block content %}
+<body>
+<div class="container">
+    <div class="col-md-6">
+    {% if Context %}
+    <table class="table">
+    	<thead>
+    		<th>City	</th>
+       	 	<th>Period	</th>
+        	<th>Period counter	</th>
+       		<th>Do calculation	</th>
+    	</thead>
+    	<tbody>
+    		<td class="UsersModelItem">{{Context.currentCity}}	</td>
+			<td class="UsersModelItem">{{Context.calculationPeriod}}	</td>
+			<td class="UsersModelItem">{{Context.periodCounter}}	</td>
+			<td class="UsersModelItem">{{Context.calculationCheck}}	</td>
+    	</tbody>
+    </table>
+    {% endif %}
+    <div id="logbox">
+      <form id="getUser" method="POST" action="/setCR"> {% csrf_token %}
+        <h1>set Base elements</h1>
+        <input name="currentCity" type="text" placeholder="current city?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
+        <input name="period" type="text" placeholder="period" required="required" class="input pass"/>
+        <input type="submit" value="Add CR" class="inputButton"/>
+      </form>
+    </div>
+   </div>
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+   </body>
+{%endblock%}
